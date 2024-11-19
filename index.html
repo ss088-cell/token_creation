@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Token Viewer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .token {
+        margin-top: 20px;
+        font-size: 18px;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>View My Current Token</h1>
+    <button onclick="fetchToken()">View My Current Token</button>
+    <div class="token" id="token"></div>
+
+    <script>
+      function fetchToken() {
+        google.script.run
+          .withSuccessHandler(function (result) {
+            document.getElementById("token").innerHTML = `<strong>${result}</strong>`;
+          })
+          .withFailureHandler(function (error) {
+            document.getElementById("token").innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
+          })
+          .getCurrentToken();
+      }
+    </script>
+  </body>
+</html>
